@@ -1,0 +1,171 @@
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>طلب الانضمام - LSPD | New Life</title>
+  <style>
+    :root{
+      --bg1:#01203a; --bg2:#03588c; --card:#f8fbff; --accent:#00b4ff;
+      --glass: rgba(255,255,255,0.06);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter, 'Segoe UI', Tahoma, sans-serif;color:#04263b}
+    body{
+      background: radial-gradient(1200px 600px at 10% 20%, rgba(0,180,255,0.08), transparent),
+                  linear-gradient(180deg,var(--bg1),var(--bg2));
+      display:flex;align-items:center;justify-content:center;padding:30px;
+      overflow:auto;
+    }/* floating animated shapes */
+.float-shape{position:fixed;width:420px;height:420px;border-radius:40%;filter:blur(40px);opacity:0.12;z-index:0;transform:translateZ(0);animation:floaty 8s ease-in-out infinite}
+.s1{left:-80px;top:-60px;background:linear-gradient(45deg,#00b4ff,#005b96)}
+.s2{right:-100px;bottom:-80px;background:linear-gradient(45deg,#0066cc,#003f5c);animation-duration:10s}
+@keyframes floaty{0%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-24px) rotate(6deg)}100%{transform:translateY(0) rotate(0deg)}}
+
+.wrap{width:100%;max-width:980px;display:grid;grid-template-columns:1fr 420px;gap:28px;z-index:1}
+
+/* main card */
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));backdrop-filter: blur(8px);border-radius:16px;padding:22px;box-shadow: 0 8px 30px rgba(2,18,34,0.45);border:1px solid rgba(255,255,255,0.04)}
+
+h1{margin:0 0 8px 0;color:#e6f7ff;text-shadow:0 2px 18px rgba(0,180,255,0.08);font-size:20px}
+p.lead{margin:0 0 12px 0;color:#d7f0ff;opacity:0.9}
+
+form label{display:block;margin-top:12px;color:#cfeefe;font-weight:600}
+input,select,textarea{width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);color:#e9f8ff;outline:none;box-shadow:inset 0 -2px 6px rgba(0,0,0,0.25)}
+textarea{min-height:110px;resize:vertical}
+
+.row{display:flex;gap:12px}
+.col{flex:1}
+
+.btn{display:inline-block;padding:10px 14px;border-radius:10px;border:none;background:linear-gradient(90deg,var(--accent),#0078c8);color:white;font-weight:700;cursor:pointer;margin-top:10px;box-shadow:0 6px 18px rgba(0,0,0,0.25)}
+.muted{color:rgba(225,245,255,0.7);font-size:13px}
+
+/* right column: preview/list */
+.mini-card{padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03)}
+.list{max-height:520px;overflow:auto;margin-top:12px}
+.item{padding:10px;border-radius:10px;margin-bottom:10px;background:linear-gradient(180deg, rgba(0,0,0,0.03), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02)}
+.meta{font-size:12px;color:#cfeefe;opacity:0.9}
+
+/* 3D animated submit button effect */
+.btn-3d{position:relative;transform-style:preserve-3d;transition:transform .12s cubic-bezier(.2,.9,.3,1)}
+.btn-3d:active{transform:translateY(3px) rotateX(6deg)}
+
+/* responsive */
+@media(max-width:920px){ .wrap{grid-template-columns:1fr; padding:0 8px} .s1,.s2{display:none} }
+
+  </style>
+</head>
+<body>
+  <div class="float-shape s1" aria-hidden></div>
+  <div class="float-shape s2" aria-hidden></div>  <div class="wrap">
+    <div class="card" role="main">
+      <h1>طلب الإنضمام لـ LSPD</h1>
+      <p class="lead">عَبِّي الفورم بالحقائق الحقيقية والمدخلات داخل اللعبة — كل شيء يتسجل في ملف <code>applications.json</code>.</p><form id="applyForm" autocomplete="off">
+    <div class="row">
+      <div class="col">
+        <label>الاسم (في الحياة الواقعية)</label>
+        <input name="real_name" placeholder="مثال: محمد بن علي" required />
+      </div>
+      <div class="col">
+        <label>العمر (في الحياة الواقعية)</label>
+        <input name="real_age" type="number" min="14" placeholder="مثال: 22" required />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label>الاسم داخل اللعبة</label>
+        <input name="ig_name" placeholder="In-Game Name" required />
+      </div>
+      <div class="col">
+        <label>الـ Level داخل اللعبة</label>
+        <input name="ig_level" type="number" min="0" placeholder="مثال: 45" required />
+      </div>
+    </div>
+
+    <label>Discord (username#0000)</label>
+    <input name="discord" placeholder="مثال: Player#1234" required />
+
+    <label>علاش تحب تدخل معانا في LSPD؟ (قصير)</label>
+    <textarea name="why_join" placeholder="أذكر أسبابك ونواياك" required></textarea>
+
+    <label>شنوة تفيدنا؟ (مهارات، أدوار متقنة، أو خبرة سابقة)</label>
+    <textarea name="what_you_offer" placeholder="مثال: خبرة في التاكتيك، قيادة الدوريات، تنظيم فعاليات" required></textarea>
+
+    <label>أوقات النشاط (Active Hours)</label>
+    <input name="active_hours" placeholder="مثال: GMT+1 - 18:00-23:00 (كل يوم تقريباً)" />
+
+    <label>Backstory / السيرة داخل اللعبة (مختصر)</label>
+    <textarea name="backstory" placeholder="قصة شخصيتك أو باكستوري داخل السيرفر"></textarea>
+
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <button class="btn btn-3d" type="submit">إرسال الطلب</button>
+      <div id="status" class="muted">لم يتم الإرسال بعد</div>
+    </div>
+  </form>
+
+</div>
+
+<aside class="mini-card card">
+  <h3 style="margin:0;color:#eaf9ff">طلبات مُرسلة</h3>
+  <p class="muted">قائمة الطلبات الموجودة في الخادم — حدّث العرض بعد الإرسال.</p>
+  <div class="list" id="applicationsList">...</div>
+  <div style="display:flex;gap:8px;margin-top:10px">
+    <button id="refresh" class="btn" style="background:linear-gradient(90deg,#036fbf,#003f6b)">تحديث</button>
+    <button id="download" class="btn" style="background:linear-gradient(90deg,#00b4ff,#0066cc)">تحميل JSON</button>
+  </div>
+</aside>
+
+  </div>  <script>
+    const api = '/api/applications';
+    const form = document.getElementById('applyForm');
+    const status = document.getElementById('status');
+    const listEl = document.getElementById('applicationsList');
+
+    function el(t,cls,txt){ const e=document.createElement(t); if(cls) e.className=cls; if(txt) e.textContent=txt; return e }
+
+    async function fetchApps(){
+      try{
+        const res = await fetch(api);
+        if(!res.ok) throw new Error('شبكة');
+        const data = await res.json();
+        renderList(data.reverse());
+      }catch(e){ listEl.innerHTML = '<div class="muted">فشل جلب الطلبات</div>'; }
+    }
+
+    function renderList(items){
+      if(!items || items.length===0){ listEl.innerHTML = '<div class="muted">لا توجد طلبات حتى الآن</div>'; return }
+      listEl.innerHTML = '';
+      items.forEach(it => {
+        const node = el('div','item');
+        const title = el('div',null, `${it.ig_name} — ${it.discord || ''}`);
+        const meta = el('div','meta', `${new Date(it.created_at).toLocaleString()} • Level: ${it.ig_level || '-'} • Age: ${it.real_age || '-'} `);
+        const why = el('div',null, `سبب: ${it.why_join || '-'} `);
+        const offer = el('div',null, `تفيدنا: ${it.what_you_offer || '-'} `);
+        node.appendChild(title); node.appendChild(meta); node.appendChild(why); node.appendChild(offer);
+        listEl.appendChild(node);
+      });
+    }
+
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(form).entries());
+      status.textContent = '...جاري الإرسال';
+      try{
+        const res = await fetch(api, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+        const json = await res.json();
+        if(json.success){ status.textContent = 'تم الإرسال بنجاح'; form.reset(); fetchApps(); }
+        else status.textContent = 'خطأ: ' + (json.error || '');
+      }catch(err){ status.textContent = 'فشل الاتصال بالخادم'; }
+      setTimeout(()=>{ if(status.textContent !== 'تم الإرسال بنجاح') status.textContent = 'لم يتم الإرسال بعد' }, 3000);
+    });
+
+    document.getElementById('refresh').addEventListener('click', fetchApps);
+    document.getElementById('download').addEventListener('click', async ()=>{
+      try{ const res = await fetch('/applications.json'); const text = await res.text(); const blob = new Blob([text],{type:'application/json'}); const url = URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='applications.json'; a.click(); URL.revokeObjectURL(url); }
+      catch(e){ alert('فشل تحميل الملف') }
+    });
+
+    // initial load
+    fetchApps();
+  </script></body>
+</html>
