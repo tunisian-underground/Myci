@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>OutSide | Sign Up</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #ff8000, #222);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .signup-box {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 30px;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        width: 350px;
+        animation: fadeIn 1s ease;
+    }
+    h2 {
+        text-align: center;
+        color: #fff;
+        margin-bottom: 20px;
+    }
+    input {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 8px;
+        outline: none;
+    }
+    .btn {
+        width: 100%;
+        padding: 10px;
+        margin-top: 15px;
+        background: #ff8000;
+        border: none;
+        color: white;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .btn:hover {
+        background: #ff9f3f;
+    }
+    .check-msg {
+        font-size: 13px;
+        height: 16px;
+        color: yellow;
+        margin-bottom: 5px;
+    }
+    .toggle-pass {
+        position: absolute;
+        right: 15px;
+        top: 12px;
+        cursor: pointer;
+        color: #555;
+    }
+    .pass-wrapper {
+        position: relative;
+    }
+    @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(-20px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+    .login-link {
+        text-align: center;
+        margin-top: 10px;
+        color: #fff;
+        font-size: 14px;
+    }
+    .login-link a {
+        color: #ff8000;
+        text-decoration: none;
+    }
+</style>
+</head>
+<body>
+
+<div class="signup-box">
+    <h2>Welcome</h2>
+    <div class="check-msg" id="checkMsg"></div>
+    <input type="text" id="username" placeholder="Username" required>
+    <div class="pass-wrapper">
+        <input type="password" id="password" placeholder="Password" required>
+        <span class="toggle-pass" id="togglePass">👁️</span>
+    </div>
+    <button class="btn" id="createAccount">Create Account</button>
+    <div class="login-link">
+        Have an account? <a href="login.html">Login</a>
+    </div>
+</div>
+
+<script>
+    const usernameField = document.getElementById('username');
+    const checkMsg = document.getElementById('checkMsg');
+    const togglePass = document.getElementById('togglePass');
+    const passField = document.getElementById('password');
+
+    usernameField.addEventListener('input', async () => {
+        const username = usernameField.value.trim();
+        if (username.length < 3) {
+            checkMsg.textContent = "";
+            return;
+        }
+        let res = await fetch('/check-username', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ username })
+        });
+        let data = await res.json();
+        if (data.exists) {
+            checkMsg.style.color = 'red';
+            checkMsg.textContent = 'Username already taken';
+        } else {
+            checkMsg.style.color = 'lime';
+            checkMsg.textContent = 'Username available';
+        }
+    });
+
+    togglePass.addEventListener('click', () => {
+        if (passField.type === 'password') {
+            passField.type = 'text';
+            togglePass.textContent = '🙈';
+        } else {
+            passField.type = 'password';
+            togglePass.textContent = '👁️';
+        }
+    });
+
+    document.getElementById('createAccount').addEventListener('click', async () => {
+        const username = usernameField.value.trim();
+        const password = passField.value.trim();
+        if (!username || !password) {
+            alert('Please fill all fields');
+            return;
+        }
+        let res = await fetch('/signup', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ username, password })
+        });
+        let data = await res.json();
+        if (res.ok) {
+            alert('Account created successfully');
+            window.location.href = 'login.html';
+        } else {
+            alert(data.message);
+        }
+    });
+</script>
+
+</body>
+</html>
